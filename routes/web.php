@@ -5,6 +5,7 @@ use App\Http\Controllers\BukuController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PeminjamanController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Soap\LibrarySoapController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -38,3 +39,7 @@ Route::middleware('auth')->group(function () {
         'kembalikan'
     ])->name('peminjaman.kembalikan');
 });
+
+// SOAP Web Service SIPUS-Del
+Route::get('/soap/sipus.wsdl', [LibrarySoapController::class, 'wsdl']);
+Route::post('/soap/sipus', [LibrarySoapController::class, 'handle']);
